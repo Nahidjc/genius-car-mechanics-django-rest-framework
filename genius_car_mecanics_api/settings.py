@@ -5,35 +5,76 @@ SECRET_KEY = 'django-insecure-oe+tc0o(+pqvyelmve6n2*rhbts3lnhc4+!cyka$*@dw(jyg=e
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
     "http://127.0.0.1:3000",
+    'http://localhost:3000',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000'
+]
+
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'car_app',
+    'rest_framework',
     'corsheaders',
+
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+]
+
+
+MIDDLEWARE_CLASSES = [
+
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",
+
 ]
 
 ROOT_URLCONF = 'genius_car_mecanics_api.urls'
