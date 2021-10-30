@@ -13,3 +13,10 @@ class ServiceSerializer(serializers.ModelSerializer):
 class DeleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Services
+
+
+class ServiceDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Services
+        fields = '__all__'
+        lookup_field = 'id'

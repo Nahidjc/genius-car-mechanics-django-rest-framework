@@ -2,9 +2,9 @@ from django.db.models import query
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Services
-from .serializers import ServiceSerializer, DeleteSerializer
+from .serializers import ServiceSerializer, DeleteSerializer, ServiceDetailsSerializer
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView
 from rest_framework import permissions, serializers, status
 from rest_framework.decorators import api_view
 from rest_framework import generics
@@ -28,7 +28,13 @@ class ServiceViewSet(generics.ListCreateAPIView):
     #     return Response(serializer.data)
 
 
-class ServiceDelete(generics.DestroyAPIView):
+class ServiceDelete(DestroyAPIView):
     queryset = Services.objects.all()
     serializer_class = DeleteSerializer
+    lookup_field = 'id'
+
+
+class ServiceDetailsView(RetrieveUpdateAPIView):
+    serializer_class = ServiceDetailsSerializer
+    queryset = Services.objects.all()
     lookup_field = 'id'
